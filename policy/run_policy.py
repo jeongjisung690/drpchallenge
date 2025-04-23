@@ -4,7 +4,7 @@ from .epymarl.src.modules.agents.rnn_agent import RNNAgent  # EPyMARLそのま�
 
 
 class DummyArgs:
-    def __init__(self, hidden_dim=64, n_actions=None, use_rnn=True):
+    def __init__(self, hidden_dim=64, n_actions=None, use_rnn=False):
         self.hidden_dim = hidden_dim
         self.n_actions = n_actions
         self.use_rnn = use_rnn
@@ -12,7 +12,7 @@ class DummyArgs:
 
 class PolicyRunner:
     def __init__(self, model_path, input_shape, n_actions, agent_num):
-        self.args = DummyArgs(hidden_dim=64, n_actions=n_actions, use_rnn=True)
+        self.args = DummyArgs(hidden_dim=64, n_actions=n_actions, use_rnn=False)
         self.agent = RNNAgent(input_shape, self.args)
         self.agent.load_state_dict(torch.load(model_path, map_location='cpu'))
         self.agent.eval()
